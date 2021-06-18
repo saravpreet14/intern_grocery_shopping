@@ -39,6 +39,7 @@ function checkErrors (event) {
 function deleteItem (name) {
     groceryListData[name].element.remove();
     delete groceryListData[name];
+    resetForm();
 }
 
 function getListItemHtml (name, quantity) {
