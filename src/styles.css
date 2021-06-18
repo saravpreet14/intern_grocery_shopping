@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&display=swap');
 
 :root {
     --headlineColor: #E88670;
@@ -82,7 +82,7 @@ p {
     font-size: 1.1rem;
     padding: 5px;
     margin: 5px 5px;
-    margin-top: 15px;
+    margin-top: 0;
     border-color: var(--editButton);
     color: var(--editButton);
     border-radius: 10px;
@@ -93,7 +93,7 @@ p {
     font-size: 1.1rem;
     padding: 5px;
     margin: 5px 5px;
-    margin-top: 15px;
+    margin-top: 0;
     border-color: var(--deleteButton);
     color: var(--deleteButton);
     border-radius: 10px;
@@ -116,6 +116,7 @@ p {
 
 .listItemQuantity {
     float: right;
+    font-weight: 700;
 }
 
 @media (max-width: 1000px) {
