@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 
+:root {
+    --headlineColor: #E88670;
+    --editButton: #4C7D60;
+    --submitButton: #384960;
+    --deleteButton: #FF6060;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +40,7 @@ h1 {
     text-align: center;
     font-family: 'Kaushan Script', cursive;
     color: aliceblue;
-    background-color: black;
+    background-color: var(--headlineColor);
     font-size: 3rem;
     height: 1.6em;
     /* , Helvetica, Arial, cursive; */
@@ -59,8 +66,8 @@ input {
     padding: 10px 16px;
     font-size: 1.3rem;
     margin: 15px 10px;
-    background-color: #1C6CFD;
-    border-color: #1C6CFD;
+    background-color: var(--submitButton);
+    border-color: var(--submitButton);
     border-radius: 10px;
     color: white;
     min-width: 100px;
@@ -81,8 +88,8 @@ p {
     padding: 5px;
     margin: 5px 5px;
     margin-top: 15px;
-    border-color: #3FBF41;
-    color: #20963a;
+    border-color: var(--editButton);
+    color: var(--editButton);
     border-radius: 10px;
 } 
 
@@ -92,8 +99,8 @@ p {
     padding: 5px;
     margin: 5px 5px;
     margin-top: 15px;
-    border-color: #FF6060;
-    color: #FF6060;
+    border-color: var(--deleteButton);
+    color: var(--deleteButton);
     border-radius: 10px;
 }
 
