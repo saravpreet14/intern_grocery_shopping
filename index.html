@@ -12,18 +12,16 @@
     <h1>Grocery List</h1>
     <main>
         <div id="itemForm" >
-            <form onsubmit="submitForm(event)" >
-                <span id='formTitle'>Add Item</span>
-                <div>
-                    <input id='nameInput' type="text" placeholder="Item Name" name="itemName" >
-                    <p id='nameError' class="error"></p>
-                </div>
-                <div>
-                    <input id='quantityInput' type="number" placeholder="Quantity" name="itemQuantity" >
-                    <p id='quantityError' class="error"></p>
-                </div>
-                <button id='submitButton'>Add</button>
-            </form>
+            <span id='formTitle'>Add Item</span>
+            <div>
+                <input id='nameInput' type="text" placeholder="Item Name" name="itemName" >
+                <p id='nameError' class="error"></p>
+            </div>
+            <div>
+                <input id='quantityInput' type="number" placeholder="Quantity" name="itemQuantity" >
+                <p id='quantityError' class="error"></p>
+            </div>
+            <button id='submitButton' onclick="addItem()">Add</button>
         </div>
         <div id="groceryList" >
         </div>

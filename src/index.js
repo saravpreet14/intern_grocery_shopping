@@ -1,24 +1,30 @@
+// To store all items data
 const groceryListData = {};
+
+// To store all ussually accessed dom elements
 const domElements = {
     groceryList: document.querySelector('#groceryList'),
-    submitFormButton: document.querySelector('form button'),
-    form: document.querySelector('form'),
+    submitFormButton: document.querySelector('#submitButton'),
     formNameInput: document.querySelector('#nameInput'),
     formQuantityInput: document.querySelector('#quantityInput'),
     formTitle: document.querySelector('#formTitle'),
 };
 
+// Reset form to add functionality
 function resetForm () {
-    domElements.form.setAttribute('onsubmit', "submitForm(event)");
     domElements.formNameInput.value = '';
     domElements.formQuantityInput.value = '';
     domElements.submitFormButton.innerText = 'Add';
+    domElements.submitFormButton.setAttribute('onclick', 'addItem()');
     domElements.formTitle.innerText = 'Add Item'
 }
 
-function checkErrors (event) {
+// Check and display errors with given input
+function checkErrors () {
+    const inputName = domElements.formNameInput.value;
+    const inputQuantity = domElements.formQuantityInput.value;
     let error = false;
-    if (event.target[0].value.length === 0) {
+    if (inputName.length === 0) {
         document.querySelector('#nameError').innerText = 'Enter item name';
         error = true;
     }
@@ -26,7 +32,7 @@ function checkErrors (event) {
         document.querySelector('#nameError').innerText = '';
     }
 
-    if (event.target[1].value <= 0) {
+    if (inputQuantity <= 0) {
         document.querySelector('#quantityError').innerText = 'Enter quantity more than 0';
         error = true;
     }
@@ -36,46 +42,29 @@ function checkErrors (event) {
     return error;
 }
 
-function deleteItem (name) {
-    groceryListData[name].element.remove();
-    delete groceryListData[name];
-    resetForm();
-}
-
+// Returns HTML for displaying list item
 function getListItemHtml (name, quantity) {
     return `
-    <p class='listItemName'>${name}</p>
-    &emsp;x<p class='listItemQuantity'>${quantity}</p>
-    <br>
-    <button class='editButton' onclick="renderEditItemForm('${name}')" >Edit</button>
-    <button class='deleteButton' onclick="deleteItem('${name}')" >Delete</button>
-`
+        <div>
+            <p class='listItemName'>${name}</p>
+            <p class='listItemQuantity'>x${quantity}</p>
+        </div>
+        <br>
+        <button class='editButton' onclick="renderEditItemForm('${name}')" >Edit</button>
+        <button class='deleteButton' onclick="deleteItem('${name}')" >Delete</button>
+    `;
 }
 
-async function editItem (event, prevName) {
-    event.preventDefault();
-    if(checkErrors(event)) {
-        return;
-    }
-    const newName = event.target[0].value;
-    const newQuantity = event.target[1].value;
-    if(newName !== prevName) {
-        groceryListData[newName] = {...groceryListData[prevName]};
-        delete groceryListData[prevName];
-    }
-    groceryListData[newName].quantity = Number(newQuantity);
-    groceryListData[newName].element.innerHTML = getListItemHtml(newName, newQuantity);
-    await resetForm();
-}
-
+// Change form to edit functionality
 function renderEditItemForm (name) {
     domElements.formTitle.innerText = 'Edit Item';
     domElements.submitFormButton.innerText = 'Edit';
+    domElements.submitFormButton.setAttribute('onclick', `editItem('${name}')`);
     domElements.formNameInput.value = name;
     domElements.formQuantityInput.value = groceryListData[name].quantity;
-    domElements.form.setAttribute('onsubmit', `editItem(event, '${name}')`);
 }
 
+// Create and returns list item to be diplayed and stored
 function createListItem (name, quantity) {
     let listElement = document.createElement('div');
     listElement.classList.add('listElement');
@@ -87,26 +76,47 @@ function createListItem (name, quantity) {
     return listElement;
 }
 
-function addItemToList (name, quantity) {
-    quantity = Number(quantity);
+// Edit item functionality
+function editItem (prevName) {
+    if(checkErrors()) {
+        return;
+    }
+    const newName = domElements.formNameInput.value;
+    const newQuantity = Number(domElements.formQuantityInput.value);
+    if(newName !== prevName) {
+        groceryListData[newName] = {...groceryListData[prevName]};
+        delete groceryListData[prevName];
+    }
+    groceryListData[newName].quantity = Number(newQuantity);
+    groceryListData[newName].element.innerHTML = getListItemHtml(newName, newQuantity);
+    resetForm();
+}
+
+// Add item functionality
+function addItem () {
+    if(checkErrors()) {
+        return;
+    }
+    const name = domElements.formNameInput.value;
+    const quantity = Number(domElements.formQuantityInput.value);
     if (groceryListData.hasOwnProperty(name)) {
         groceryListData[name].quantity += quantity;
-        groceryListData[name].element.querySelector('.listItemQuantity').innerText = groceryListData[name].quantity;
+        groceryListData[name].element.querySelector('.listItemQuantity').innerText = 'x' + groceryListData[name].quantity;
     }
     else {
         domElements.groceryList.append(createListItem(name, quantity));
     }
+    resetForm();
 }
 
-async function submitForm (event) {
-    event.preventDefault();
-    if(checkErrors(event)) {
-        return;
-    }
-    addItemToList(event.target[0].value, event.target[1].value);
-    await resetForm();
+// Delete item functionality
+function deleteItem (name) {
+    groceryListData[name].element.remove();
+    delete groceryListData[name];
+    resetForm();
 }
 
+// Initail loading of data from local storage
 window.onload = () => {
     const loadedData = JSON.parse(localStorage.getItem('listItems'));
     for (let name in loadedData) {
@@ -114,14 +124,12 @@ window.onload = () => {
     }
 }
 
+// Updating data in local storage on exit
 window.onbeforeunload = () => {
     const storeData = {};
     const orderedItemData = document.querySelectorAll('.listItemName');
     orderedItemData.forEach(item => {
         storeData[item.innerText] = Number(groceryListData[item.innerText].quantity);
-    })
-    // for (let name in groceryListData) {
-    //     storeData[name] = Number(groceryListData[name].quantity);
-    // }
+    });
     localStorage.setItem('listItems', JSON.stringify(storeData));
 }

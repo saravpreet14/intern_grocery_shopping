@@ -23,10 +23,6 @@ main {
     margin-top: 25px;
 }
 
-div {
-    /* border: 1px solid black; */
-}
-
 #groceryList {
     height: 90vh;
     overflow: scroll;
@@ -43,7 +39,6 @@ h1 {
     background-color: var(--headlineColor);
     font-size: 3rem;
     height: 1.6em;
-    /* , Helvetica, Arial, cursive; */
 }
 
 .error {
@@ -111,13 +106,16 @@ p {
 }
 
 .listElement {
-    /* min-height: 10vh; */
     font-size: 1.4rem;
     font-family: 'Comfortaa', cursive;
     border: 1px solid teal;
     border-radius: 10px;
     margin-top: 15px;
     padding: 10px 5px;
+}
+
+.listItemQuantity {
+    float: right;
 }
 
 @media (max-width: 1000px) {
