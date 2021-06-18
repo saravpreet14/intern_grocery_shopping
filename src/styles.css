@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin: auto;
+    margin-top: 25px;
+}
+
+div {
+    /* border: 1px solid black; */
+}
+
+#groceryList {
+    height: 90vh;
+    overflow: scroll;
+}
+
+#itemForm {
+    height: 40vh;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Kaushan Script', cursive;
+    color: aliceblue;
+    background-color: black;
+    font-size: 3rem;
+    height: 1.6em;
+    /* , Helvetica, Arial, cursive; */
+}
+
+.error {
+    color: red;
+}
+
+input {
+    display: flex;
+    margin: 0 10px;
+    margin-top: 10px;
+    width: 80%;
+    min-height: 30px;
+    font-size: 1.2rem;
+    caret-color: #0A0A14;
+    padding: 10px;
+    padding-left: 16px;
+}
+
+#submitButton {
+    padding: 10px 16px;
+    font-size: 1.3rem;
+    margin: 15px 10px;
+    background-color: #1C6CFD;
+    border-color: #1C6CFD;
+    border-radius: 10px;
+    color: white;
+    min-width: 100px;
+}
+
+input:hover {
+    border-color: #1C6CFD;
+}
+
+p {
+    display: inline;
+    margin: 0 10px;
+}
+
+.editButton {
+    background-color: transparent;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin: 5px 5px;
+    margin-top: 15px;
+    border-color: #3FBF41;
+    color: #20963a;
+    border-radius: 10px;
+} 
+
+.deleteButton {
+    background-color: transparent;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin: 5px 5px;
+    margin-top: 15px;
+    border-color: #FF6060;
+    color: #FF6060;
+    border-radius: 10px;
+}
+
+#formTitle {
+    font-size: 1.7rem;
+    font-family: 'Pangolin', cursive;
+    margin: 5px auto;
+}
+
+.listElement {
+    /* min-height: 10vh; */
+    font-size: 1.4rem;
+    font-family: 'Comfortaa', cursive;
+    border: 1px solid teal;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 10px 5px;
+}
+
+@media (max-width: 1000px) {
+    main {
+        width: 80%;
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+}
