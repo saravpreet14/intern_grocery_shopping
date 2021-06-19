@@ -29,7 +29,7 @@ main {
 }
 
 #itemForm {
-    height: 40vh;
+    height: auto;
 }
 
 h1 {
@@ -129,5 +129,8 @@ p {
     main {
         width: 90%;
         grid-template-columns: 1fr;
+    }
+    #groceryList {
+        height: 64vh;
     }
 }
