@@ -84,11 +84,20 @@ function editItem (prevName) {
     const newName = domElements.formNameInput.value;
     const newQuantity = Number(domElements.formQuantityInput.value);
     if(newName !== prevName) {
-        groceryListData[newName] = {...groceryListData[prevName]};
-        delete groceryListData[prevName];
+        if(newName in groceryListData) {
+            deleteItem(prevName);
+            groceryListData[newName].quantity += newQuantity;
+        }
+        else {
+            groceryListData[newName] = {...groceryListData[prevName]};
+            groceryListData[newName].quantity = newQuantity;
+            delete groceryListData[prevName];
+        }
     }
-    groceryListData[newName].quantity = Number(newQuantity);
-    groceryListData[newName].element.innerHTML = getListItemHtml(newName, newQuantity);
+    else {
+        groceryListData[newName].quantity = newQuantity;
+    }
+    groceryListData[newName].element.innerHTML = getListItemHtml(newName, groceryListData[newName].quantity);
     resetForm();
 }
 

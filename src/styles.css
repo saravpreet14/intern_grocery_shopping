@@ -119,6 +119,10 @@ p {
     font-weight: 700;
 }
 
+.listItemName {
+    word-wrap: break-word;
+}
+
 @media (max-width: 1000px) {
     main {
         width: 80%;
