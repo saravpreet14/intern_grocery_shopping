@@ -123,13 +123,13 @@ p {
     word-wrap: break-word;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     main {
         width: 80%;
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     main {
         width: 90%;
         grid-template-columns: 1fr;
